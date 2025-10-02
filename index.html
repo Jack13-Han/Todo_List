@@ -25,10 +25,9 @@
             <div>
                 <h1 class="text-5xl mt-3 block text-center mb-5" id="title">To Do List</h1>
                 <div class="mt-6 flex justify-between">
-                    <input class="flex-grow px-3 border-2" id="textinput" type="text" placeholder="検査">
-                    <button
-                        class="bg-[#3f3b3b] size-12 flex items-center justify-center text-white focus-visible:outline-none"
-                        id="btn">
+                    <input class="flex-grow px-3 border-2 focus-visible:outline-none" id="textInput" type="text"
+                        placeholder="検査">
+                    <button class="bg-[#3f3b3b] size-12 flex items-center justify-center text-white " id="btn">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -52,26 +51,33 @@
             </div>
 
 
-            <div class="listgroup  mt-4">
+            <div class="listgroup mt-4" id="listGroup">
                 <div class="empty-stage mt-15 last:block hidden">
-                   <div class="flex items-center gap-3 flex-col">
-                    <img src="/src/img/empty.svg" class="w-32" alt="">
-                     <p>There is no list</p>
-                   </div>
-               </div>
-                <!-- <div class="list px-3 mb-3 border border-2 py-2 flex flex-wrap justify-around items-center ">
-                    <input class="" type="checkbox">
-                    <p>
-                        san kyi tr pr
-                    </p>
+                    <div class="flex items-center gap-3 flex-col">
+                        <img src="/src/img/empty.svg" class="w-32" alt="">
+                        <p>There is no list</p>
+                    </div>
+                </div>
 
-                    <button class="bg-[#f4fa9c] px-4 py-2 rounded-xl"><a href="#"><i
-                                class="fa-solid fa-pencil"></i></a></button>
-                    <button class="bg-[#ff304f] px-4 py-2 rounded-xl"><a href="#"><i
-                                class="fa-solid fa-trash"></i></a></button>
-                </div> -->
 
-               
+
+                <div class="list">
+                    <!-- <div class="px-3 mb-3 border border-2 py-2 flex flex-wrap justify-around items-center ">
+                        <input class="" type="checkbox">
+                        <p>
+                            san kyi tr pr
+                        </p>
+
+                        <div class="control">
+                            <button class="bg-[#f4fa9c] px-4 py-2 rounded-xl"><a href="#"><i
+                                        class="fa-solid fa-pencil"></i></a></button>
+                            <button class="bg-[#ff304f] px-4 py-2 rounded-xl"><a href="#"><i
+                                        class="fa-solid fa-trash"></i></a></button>
+                        </div>
+                    </div> -->
+                </div>
+
+
             </div>
 
         </div>

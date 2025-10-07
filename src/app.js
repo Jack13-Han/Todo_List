@@ -124,7 +124,9 @@ const listGroupHandler =(event) => {
   const list = event.target.closest(".list")
 
  if(event.target.classList.contains("list-delete")){
-    if (window.confirm("Are you sure to delete..? ")) {
+    const currentTask = listTask.innerText ;
+
+    if (window.confirm(`Are you sure to delete..?${currentTask} `)) {
       list.remove();
       updateDoneTaskTotal()
       updateTaskTotal()
@@ -201,5 +203,12 @@ const listDone = list.querySelector(".list-done-check");
 
 //event
 
+
+if(textInput.value===""){
+  // window.alert("Put Your List")
+}else{
 addListBtn.addEventListener("click", addList);
+
+}
+
 listGroup.addEventListener("click",listGroupHandler);

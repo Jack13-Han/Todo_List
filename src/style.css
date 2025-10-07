@@ -227,6 +227,9 @@
   .min-h-\[500px\] {
     min-height: 500px;
   }
+  .min-h-\[1000px\] {
+    min-height: 1000px;
+  }
   .w-32 {
     width: calc(var(--spacing) * 32);
   }
@@ -235,6 +238,12 @@
   }
   .w-\[400px\] {
     width: 400px;
+  }
+  .max-w-\[300px\] {
+    max-width: 300px;
+  }
+  .max-w-\[350px\] {
+    max-width: 350px;
   }
   .max-w-\[400px\] {
     max-width: 400px;
@@ -322,15 +331,6 @@
   .py-5 {
     padding-block: calc(var(--spacing) * 5);
   }
-  .py-8 {
-    padding-block: calc(var(--spacing) * 8);
-  }
-  .py-10 {
-    padding-block: calc(var(--spacing) * 10);
-  }
-  .py-20 {
-    padding-block: calc(var(--spacing) * 20);
-  }
   .text-center {
     text-align: center;
   }
@@ -395,6 +395,36 @@
   .disabled\:opacity-25 {
     &:disabled {
       opacity: 25%;
+    }
+  }
+  .sm\:w-5 {
+    @media (width >= 40rem) {
+      width: calc(var(--spacing) * 5);
+    }
+  }
+  .sm\:w-\[50\%\] {
+    @media (width >= 40rem) {
+      width: 50%;
+    }
+  }
+  .sm\:w-\[300px\] {
+    @media (width >= 40rem) {
+      width: 300px;
+    }
+  }
+  .\32 xl\:w-\[250px\] {
+    @media (width >= 96rem) {
+      width: 250px;
+    }
+  }
+  .\32 xl\:w-\[350px\] {
+    @media (width >= 96rem) {
+      width: 350px;
+    }
+  }
+  .\32 xl\:w-\[400px\] {
+    @media (width >= 96rem) {
+      width: 400px;
     }
   }
 }

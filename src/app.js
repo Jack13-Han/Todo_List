@@ -124,9 +124,11 @@ const listGroupHandler =(event) => {
   const list = event.target.closest(".list")
 
  if(event.target.classList.contains("list-delete")){
+
+  const listTask = list.querySelector(".list-task");
     const currentTask = listTask.innerText ;
 
-    if (window.confirm(`Are you sure to delete..?${currentTask} `)) {
+    if (window.confirm(`Are you sure to delete..? \n "${currentTask} "`)) {
       list.remove();
       updateDoneTaskTotal()
       updateTaskTotal()
@@ -137,6 +139,7 @@ const listGroupHandler =(event) => {
  if(event.target.classList.contains("list-edit")){
 
   const listDone = list.querySelector(".list-done-check");
+  
   const listTask = list.querySelector(".list-task");
   const listEditBtn = list.querySelector(".list-edit");
    

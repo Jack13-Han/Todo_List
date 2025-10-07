@@ -322,6 +322,15 @@
   .py-5 {
     padding-block: calc(var(--spacing) * 5);
   }
+  .py-8 {
+    padding-block: calc(var(--spacing) * 8);
+  }
+  .py-10 {
+    padding-block: calc(var(--spacing) * 10);
+  }
+  .py-20 {
+    padding-block: calc(var(--spacing) * 20);
+  }
   .text-center {
     text-align: center;
   }

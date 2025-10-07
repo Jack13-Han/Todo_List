@@ -9,7 +9,6 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-blue-100: oklch(93.2% 0.032 255.585);
-    --color-stone-800: oklch(26.8% 0.007 34.298);
     --color-white: #fff;
     --spacing: 0.25rem;
     --text-2xl: 1.5rem;
@@ -172,6 +171,9 @@
   }
 }
 @layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
   .mx-auto {
     margin-inline: auto;
   }
@@ -227,6 +229,9 @@
   }
   .w-32 {
     width: calc(var(--spacing) * 32);
+  }
+  .w-\[180px\] {
+    width: 180px;
   }
   .w-\[400px\] {
     width: 400px;
@@ -299,9 +304,6 @@
   .bg-blue-100 {
     background-color: var(--color-blue-100);
   }
-  .px-2 {
-    padding-inline: calc(var(--spacing) * 2);
-  }
   .px-3 {
     padding-inline: calc(var(--spacing) * 3);
   }
@@ -350,9 +352,6 @@
   .accent-\[\#3f3b3b\] {
     accent-color: #3f3b3b;
   }
-  .accent-stone-800 {
-    accent-color: var(--color-stone-800);
-  }
   .opacity-20 {
     opacity: 20%;
   }
@@ -382,6 +381,11 @@
     &:focus-visible {
       --tw-outline-style: none;
       outline-style: none;
+    }
+  }
+  .disabled\:opacity-25 {
+    &:disabled {
+      opacity: 25%;
     }
   }
 }

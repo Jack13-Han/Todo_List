@@ -14,10 +14,11 @@ textInput.addEventListener("change", () => {
   addList();
 });
 
-const addList = () => {
-  //   title.innerHTML = textInput.value;
-  listGroup.append(createNewList(textInput.value));
 
+
+//create list 
+const addList = () => {
+  listGroup.append(createNewList(textInput.value));
   textInput.value = null;
   updateTaskTotal();
 };
@@ -119,15 +120,12 @@ const createNewList = (currentTask) => {
 
 
 //mount list to listGroup
+const listGroupHandler =(event) => { //event bubbling နဲ့ထိန်းပြီး parent တွေကို ပြန်ခေါ်သုံးတာ
+  const list = event.target.closest(".list")//အရင်ဆုံး list ထဲမှာရှိတဲ့ ကောင်တွေကို event target သုံးပြီးပြန်ခေါ်သုံးတာ
 
-const listGroupHandler =(event) => {
-  const list = event.target.closest(".list")
-
- if(event.target.classList.contains("list-delete")){
-
+ if(event.target.classList.contains("list-delete")){ //contains ဆိုတာက စစ်ဆေးတဲ့ function တစ်ခုဖြစ်ပြီး ပါ မပါ စစ်ပေးတဲ့ အရာဖြစ်ပါတယ်
   const listTask = list.querySelector(".list-task");
     const currentTask = listTask.innerText ;
-
     if (window.confirm(`Are you sure to delete..? \n "${currentTask} "`)) {
       list.remove();
       updateDoneTaskTotal()
@@ -139,7 +137,6 @@ const listGroupHandler =(event) => {
  if(event.target.classList.contains("list-edit")){
 
   const listDone = list.querySelector(".list-done-check");
-  
   const listTask = list.querySelector(".list-task");
   const listEditBtn = list.querySelector(".list-edit");
    
@@ -208,7 +205,7 @@ const listDone = list.querySelector(".list-done-check");
 
 
 if(textInput.value===""){
-  // window.alert("Put Your List")
+  
 }else{
 addListBtn.addEventListener("click", addList);
 

@@ -14,9 +14,7 @@ textInput.addEventListener("change", () => {
   addList();
 });
 
-
-
-//create list 
+//create list
 const addList = () => {
   listGroup.append(createNewList(textInput.value));
   textInput.value = null;
@@ -73,7 +71,6 @@ const createNewList = (currentTask) => {
   //   list.classList.toggle("scale-90");
   //   list.classList.add("duration-200");
 
-    
   //   if(listDone.checked){
   //   listEditBtn.setAttribute("disabled",true)
 
@@ -92,7 +89,7 @@ const createNewList = (currentTask) => {
   // listEditBtn.addEventListener("click", () => {
   //   listEditBtn.setAttribute("disabled",true)
   //   listDone.setAttribute("disabled",true)
-    
+
   //   // console.log("edit");
   //   const newTaskInput = document.createElement("input");
   //   newTaskInput.className =
@@ -106,7 +103,6 @@ const createNewList = (currentTask) => {
   //   listEditBtn.removeAttribute("disabled")
   //   listDone.removeAttribute("disabled")
 
-
   //     listTask.innerText = newTaskInput.value;
   //     listTask.classList.remove("hidden");
 
@@ -115,100 +111,106 @@ const createNewList = (currentTask) => {
   //   });
   // });
   return list;
-  
 };
 
+const deletList = (currentlist, text) => {
+  if (window.confirm(`Are you sure to delete..? \n${text}`)) {
+    currentlist.remove();
+    updateDoneTaskTotal();
+    updateTaskTotal();
+  }
+};
 
-//mount list to listGroup
-const listGroupHandler =(event) => { //event bubbling နဲ့ထိန်းပြီး parent တွေကို ပြန်ခေါ်သုံးတာ
-  const list = event.target.closest(".list")//အရင်ဆုံး list ထဲမှာရှိတဲ့ ကောင်တွေကို event target သုံးပြီးပြန်ခေါ်သုံးတာ
+//action (Business logic)
 
- if(event.target.classList.contains("list-delete")){ //contains ဆိုတာက စစ်ဆေးတဲ့ function တစ်ခုဖြစ်ပြီး ပါ မပါ စစ်ပေးတဲ့ အရာဖြစ်ပါတယ်
-  const listTask = list.querySelector(".list-task");
-    const currentTask = listTask.innerText ;
-    if (window.confirm(`Are you sure to delete..? \n "${currentTask} "`)) {
-      list.remove();
-      updateDoneTaskTotal()
-      updateTaskTotal()
-    }
- }
+//edit list Function
+const editList = (currentlist) => {
+  const listDone = currentlist.querySelector(".list-done-check");
+  const listTask = currentlist.querySelector(".list-task");
+  const listEditBtn = currentlist.querySelector(".list-edit");
 
- ///edit function
- if(event.target.classList.contains("list-edit")){
+  listEditBtn.setAttribute("disabled", true);
+  listDone.setAttribute("disabled", true);
 
-  const listDone = list.querySelector(".list-done-check");
-  const listTask = list.querySelector(".list-task");
-  const listEditBtn = list.querySelector(".list-edit");
-   
-    listEditBtn.setAttribute("disabled",true)
-    listDone.setAttribute("disabled",true)
+  const currentTask = listTask.innerText;
+  const newTaskInput = document.createElement("input");
+  newTaskInput.className =
+    "border border-2 px-3 w-[180px] focus-visible:outline-none";
+  newTaskInput.value = currentTask;
+  listTask.after(newTaskInput);
+  newTaskInput.focus();
+  listTask.classList.add("hidden");
 
-    const currentTask = listTask.innerText ;
-    const newTaskInput = document.createElement("input");
-    newTaskInput.className =
-      "border border-2 px-3 w-[180px] focus-visible:outline-none";
-    newTaskInput.value = currentTask;
-    listTask.after(newTaskInput);
-    newTaskInput.focus();
-    listTask.classList.add("hidden");
+  const events = ["change", "blur"];
 
-    newTaskInput.addEventListener("change", () => {
-    listEditBtn.removeAttribute("disabled")
-    listDone.removeAttribute("disabled")
-
+  events.forEach((event) => {
+    newTaskInput.addEventListener(event, () => {
+      listEditBtn.removeAttribute("disabled");
+      listDone.removeAttribute("disabled");
 
       listTask.innerText = newTaskInput.value;
       listTask.classList.remove("hidden");
 
       newTaskInput.remove();
-      
-    }); 
+    });
+  });
+};
 
- }
+const doneList = (currentlist) => {
+  const listDone = currentlist.querySelector(".list-done-check");
+  const listTask = currentlist.querySelector(".list-task");
 
+  const listDeleteBtn = currentlist.querySelector(".list-delete");
+  const listEditBtn = currentlist.querySelector(".list-edit");
 
- //check function
+  // console.log(currentTask+"is done")
+  listTask.classList.toggle("line-through");
+  currentlist.classList.toggle("opacity-20");
+  currentlist.classList.toggle("scale-90");
+  currentlist.classList.add("duration-200");
 
- if(event.target.classList.contains("list-done-check")){
-  console.log("check")
-
-
-const listDone = list.querySelector(".list-done-check");
-  const listTask = list.querySelector(".list-task");
-
-  const listDeleteBtn = list.querySelector(".list-delete");
-  const listEditBtn = list.querySelector(".list-edit");
-
- 
-    // console.log(currentTask+"is done")
-    listTask.classList.toggle("line-through");
-    list.classList.toggle("opacity-20");
-    list.classList.toggle("scale-90");
-    list.classList.add("duration-200");
-
-    
-    if(listDone.checked){
-    listEditBtn.setAttribute("disabled",true)
-
-    }else{
-    listEditBtn.removeAttribute("disabled")
-
-    }
-    updateDoneTaskTotal();
-
- }
+  if (listDone.checked) {
+    listEditBtn.setAttribute("disabled", true);
+  } else {
+    listEditBtn.removeAttribute("disabled");
+  }
+  updateDoneTaskTotal();
+};
 
 
-}
+
+
+//handler
+//mount list to listGroup
+const listGroupHandler = (event) => {
+  //event bubbling နဲ့ထိန်းပြီး parent တွေကို ပြန်ခေါ်သုံးတာ
+  const list = event.target.closest(".list"); //အရင်ဆုံး list ထဲမှာရှိတဲ့ ကောင်တွေကို event target သုံးပြီးပြန်ခေါ်သုံးတာ
+  const currentTask = list.querySelector(".list-task").innerText;
+
+  //delete action
+  if (event.target.classList.contains("list-delete")) {
+    //contains ဆိုတာက စစ်ဆေးတဲ့ function တစ်ခုဖြစ်ပြီး ပါ မပါ စစ်ပေးတဲ့ အရာဖြစ်ပါတယ်
+    deletList(list, currentTask);
+  }
+
+  ///edit function
+  if (event.target.classList.contains("list-edit")) {
+    editList(list);
+  }
+
+  //check function
+
+  if (event.target.classList.contains("list-done-check")) {
+    // console.log("check");
+    doneList(list);
+  }
+};
 
 //event
 
-
-if(textInput.value===""){
-  
-}else{
-addListBtn.addEventListener("click", addList);
-
+if (textInput.value === "") {
+} else {
+  addListBtn.addEventListener("click", addList);
 }
 
-listGroup.addEventListener("click",listGroupHandler);
+listGroup.addEventListener("click", listGroupHandler);

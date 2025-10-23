@@ -37,22 +37,23 @@ const updateDoneTaskTotal = () => {
 
 const createNewList = (currentTask) => {
   const list = document.createElement("div");
+  list.id = "list" + Date.now();
 
   list.classList.add("list");
 
   list.innerHTML = `
-<div class="px-3 mb-3 border border-2 py-2 flex flex-wrap justify-around items-center ">
+<div class="px-3 mb-3 border animate__animated  animate__zoomIn border-2 py-2 flex flex-wrap justify-around items-center ">
     <input class="list-done-check accent-[#3f3b3b]" type="checkbox">
     <p class="font-serif list-task ">
         ${currentTask}
     </p>
 
     <div class="control">
-        <button  class="list-edit bg-[#f4fa9c] px-4 py-2 rounded-xl disabled:opacity-25"><i
-                    class="fa-solid fa-pencil pointer-events-none"></i></button>
+        <button  class="list-edit border-2  px-4 py-2 rounded-xl  active:scale-80 duration-100 disabled:opacity-25">
+        <i class="fa-solid fa-pencil pointer-events-none"></i></button>
 
-        <button  class="list-delete bg-[#ff304f] px-4 py-2 rounded-xl"><i
-                    class="fa-solid fa-trash pointer-events-none"></i></button>
+        <button  class="list-delete border-2  px-4 py-2 rounded-xl active:scale-80 duration-100"><i
+                    class="fa-solid fa-trash  pointer-events-none"></i></button>
     </div>
 </div>
 `;
@@ -113,11 +114,18 @@ const createNewList = (currentTask) => {
   return list;
 };
 
-const deletList = (currentlist, text) => {
+const deletList = (ListId, text) => {
+  const currentList = document.querySelector(`#${ListId}`);
+  // console.log(currentList);
   if (window.confirm(`Are you sure to delete..? \n${text}`)) {
-    currentlist.remove();
-    updateDoneTaskTotal();
-    updateTaskTotal();
+    currentList.classList.add("animate__animated", "animate__hinge");
+
+    //animation event ဖမ်းပြီးတော့ သူတို့ နေရာတွေမှာ ပြန်ထားပေးတာဖြစ်ပါတယ်
+    currentList.addEventListener("animationend", () => {
+      currentList.remove();
+      updateDoneTaskTotal();
+      updateTaskTotal();
+    });
   }
 };
 
@@ -177,9 +185,6 @@ const doneList = (currentlist) => {
   updateDoneTaskTotal();
 };
 
-
-
-
 //handler
 //mount list to listGroup
 const listGroupHandler = (event) => {
@@ -190,7 +195,8 @@ const listGroupHandler = (event) => {
   //delete action
   if (event.target.classList.contains("list-delete")) {
     //contains ဆိုတာက စစ်ဆေးတဲ့ function တစ်ခုဖြစ်ပြီး ပါ မပါ စစ်ပေးတဲ့ အရာဖြစ်ပါတယ်
-    deletList(list, currentTask);
+    const listId = event.target.closest(".list").id;
+    deletList(listId, currentTask);
   }
 
   ///edit function
@@ -208,7 +214,7 @@ const listGroupHandler = (event) => {
 
 //event
 
-if (textInput.value === "") {
+if (textInput.value === "" || textInput.value.trim()) {
 } else {
   addListBtn.addEventListener("click", addList);
 }
